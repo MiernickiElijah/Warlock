@@ -92,17 +92,20 @@ function createEngineer() {
             },
         ]).then((res) => {
             currentEmployee = new Engineer(res.name, res.id, res.email, res.github);
-            plebs += `<div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="../Warlock/images/developer.png" alt="Card image cap">
-                <div class="card-body">
-                    <h1>${res.name}</h1>
-                    <h3>Engineer - ID# ${res.id}</h3>
-                    <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
-                    class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
-                    <p class="card-text"><a class="contactLink" href="https://github.com/${res.github}" target="_blank"><i
-                    class="contact fab fa-github fa-lg i"></i>GitHub: ${res.github}</a></p>
-                </div>
-</div>`;
+            plebs +=
+                `<div class="card">
+                <img class="card-img-top" src="../Warlock/images/developer.png" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">${res.name}</h4>
+                        <p class="card-text">
+                            Engineer - ID# ${res.id}
+                        </p>
+                        <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
+                            class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
+                        <p class="card-text"><a class="contactLink" href="https://github.com/${res.github}" target="_blank"><i
+                            class="contact fab fa-github fa-lg i"></i>GitHub: ${res.github}</a></p>
+                    </div>
+                </div>`;
             menu();
         });
 }
@@ -133,16 +136,19 @@ function createIntern() {
             }
         ]).then((res) => {
             currentEmployee = new Intern(res.name, res.id, res.email, res.school);
-            plebs += `<div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="../Warlock/images/intern.png" alt="Card image cap">
-                <div class="card-body">
-                    <h1>${res.name}</h1>
-                    <h3>Intern - ID# ${res.id}</h3>
-                    <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
-                    class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
-                    <p class="card-text">${res.school}</p>
-                </div>
-</div>`;
+            plebs += `
+            <div class="card">
+                <img class="card-img-top" src="../Warlock/images/intern.png" alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">${res.name}</h4>
+                        <p class="card-text">
+                            Engineer - ID# ${res.id}
+                        </p>
+                        <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
+                            class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
+                        <p class="card-text">College: ${res.school}</p>
+                    </div>
+            </div>`;
             menu();
         });
 }
@@ -157,25 +163,27 @@ function finished() {
 //index HTML file here//
 const generateHTML = () =>
     `<!DOCTYPE html>
-    <html lang="en">
+                <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="../Swashbuckler/assets/fontawesome/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <title>Team</title>
+                    <head>
+                        <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                                <link href="../Swashbuckler/assets/fontawesome/css/all.css" rel="stylesheet">
+                                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+                                        <title>Team</title>
     </head>
-<body>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-1">This is ${employees[0].name}'s Team</h1>
-            <h2 class="display-3">Title: Manager  |  Employee ID#${employees[0].id}</h2>
-                <h4 class="lead">Office Number: ${employees[0].officeNum}.</h4>
-                        <span class="badge badge-secondary bg-light"><a href="mailto:${employees[0].email}">${employees[0].email}</span></a>
-<h3>Team Members</h3>
-${plebs}
-        </div>
-</div>
-</body>
+                                    <body>
+                                        <div class="jumbotron jumbotron-fluid">
+                                            <div class="container">
+                                                <h1 class="display-1">This is ${employees[0].name}'s Team</h1>
+                                                <h2 class="display-3">Title: Manager  |  Employee ID#${employees[0].id}</h2>
+                                                <h4 class="lead">Office Number: ${employees[0].officeNum}.</h4>
+                                                <span class="badge badge-secondary bg-light"><a href="mailto:${employees[0].email}">${employees[0].email}</span></a>
+                                            </div>
+                                        </div>
+                                        <h3>Team Members</h3>
+                                        <div class="card-deck">
+                                            ${plebs}
+                                        </div>
+                                    </body>
     </html>`;
