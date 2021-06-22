@@ -1,18 +1,19 @@
-const Employee = require('./Employee.test');
+const Engineer = require('../lib/Engineer');
 
-class Engineer extends Employee {
-    constructor(name, id, email, github) {
-        super(name, id, email);
-        this.github = github;
-    }
+test("can set up github", () => {
+    const flurp = "myGitHub";
+    const e = new Engineer("Me", 1, "me@me", "myGitHub");
+    expect(e.github).toBe(flurp);
+});
 
-    getRole() {
-        return 'Engineer';
-    }
+test("can getRole() retrieve Engineer", () => {
+    const flurp = "Engineer";
+    const e = new Engineer("Me", 1, "me@me", "myGitHub");
+    expect(e.getRole()).toBe(flurp);
+});
 
-    getGitHub() {
-        return this.github;
-    }
-}
-
-console.log(Engineer);
+test("can retrieve github", () => {
+    const flurp = "myGitHub";
+    const e = new Engineer("Me", 1, "me@me", "myGitHub");
+    expect(e.getGitHub()).toBe(flurp);
+});

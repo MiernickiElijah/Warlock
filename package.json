@@ -1,6 +1,13 @@
 {
   "dependencies": {
     "inquirer": "^8.1.1",
-    "jest": "^27.0.4"
+    "jest": "^27.0.5"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose test/*"
   }
 }
