@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Team</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">This is ${answers.name}'s Team</h1>
+            <h2 class="display-5">Employee ID#${answers.employeeNum} | Title: Manager</h2>
+            <p class="lead">Office Number: ${answers.officeNum}.</p>
+            <h3>Team Members</h3>
+            <span class="badge badge-secondary bg-light"><a href="mailto:${answers.email}">${answer.email}</span></a>
+
+            <ul class="list-group">
+                <li class="list-group-item">${answers.engineerName}</li>
+                <li class="list-group-item">${role(answers.title)}</li>
+                <li class="list-group-item">${answers.idNum}</li>
+                <li class="list-group-item">My GitHub username is ${answers.githubUN}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
