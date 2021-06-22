@@ -4,14 +4,15 @@ const Manager = require('./lib/Manager')
 const Intern = require('./lib/Intern')
 const Engineer = require('./lib/Engineer');
 
-
-const employees = [];
+let employees = [];
+let plebs = '';
+let currentEmployee;
 
 inquirer
     .prompt([
         {
             type: 'input',
-            name: 'Name',
+            name: 'name',
             message: 'What is the Team Managers name?',
         },
         {
@@ -30,8 +31,9 @@ inquirer
             message: 'What is your office number?',
         },
     ])
-    .then(() => {
-        // employees.push(new Manager(Name, employeeNum, email, officeNum));
+    .then((res) => {
+        let manager = new Manager(res.name, res.employeeNum, res.email, res.officeNum);
+        employees.push(manager);
         menu();
     });
 
@@ -70,12 +72,12 @@ function createEngineer() {
         .prompt([
             {
                 type: 'input',
-                name: 'Name',
+                name: 'name',
                 message: "What is this Team Member's name?",
             },
             {
                 type: 'input',
-                name: 'idNum',
+                name: 'id',
                 message: "What is this Team Member's ID#?",
             },
             {
@@ -88,8 +90,19 @@ function createEngineer() {
                 name: 'github',
                 message: "What is this Team Member's GitHub Username?",
             },
-        ]).then(() => {
-            // employees.push(new Engineer(Name, idNum, email, github));
+        ]).then((res) => {
+            currentEmployee = new Engineer(res.name, res.id, res.email, res.github);
+            plebs += `<div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../Warlock/images/developer.png" alt="Card image cap">
+                <div class="card-body">
+                    <h1>${res.name}</h1>
+                    <h3>Engineer - ID# ${res.id}</h3>
+                    <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
+                    class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
+                    <p class="card-text"><a class="contactLink" href="https://github.com/${res.github}" target="_blank"><i
+                    class="contact fab fa-github fa-lg i"></i>GitHub: ${res.github}</a></p>
+                </div>
+</div>`;
             menu();
         });
 }
@@ -100,21 +113,36 @@ function createIntern() {
         .prompt([
             {
                 type: 'input',
-                name: 'Name',
+                name: 'name',
                 message: "What is this Team Member's name?",
             },
             {
                 type: 'input',
-                name: 'idNum',
+                name: 'id',
                 message: "What is this Team Member's ID#?",
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: "What is this Team Member's email?",
             },
             {
                 type: 'input',
                 name: 'school',
                 message: "What school did this Team Member attend?",
             }
-        ]).then(() => {
-            // employees.push(new Intern(Name, idNum, email, school));
+        ]).then((res) => {
+            currentEmployee = new Intern(res.name, res.id, res.email, res.school);
+            plebs += `<div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../Warlock/images/intern.png" alt="Card image cap">
+                <div class="card-body">
+                    <h1>${res.name}</h1>
+                    <h3>Intern - ID# ${res.id}</h3>
+                    <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
+                    class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
+                    <p class="card-text">${res.school}</p>
+                </div>
+</div>`;
             menu();
         });
 }
@@ -130,33 +158,24 @@ function finished() {
 const generateHTML = () =>
     `<!DOCTYPE html>
     <html lang="en">
-    
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="../Swashbuckler/assets/fontawesome/css/all.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <title>Team</title>
     </head>
-    
-    <body>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">This is ${Manager.Name}'s Team</h1>
-                <h2 class="display-5">Employee ID#${Manager.idNum} | Title: Manager</h2>
-                <p class="lead">Office Number: ${Manager.officeNum}.</p>
-                <h3>Team Members</h3>
-                <span class="badge badge-secondary bg-light"><a href="mailto:${Manager.email}">${Manager.email}</span></a>
-    
-                <ul class="list-group">
-                    <li class="list-group-item">Name: </li>
-                    <li class="list-group-item">ID#: </li>
-                    <li class="list-group-item">Email: </li>
-                    <li class="list-group-item">GitHub/School: </li>
-                </ul>
-
-            </div>
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-1">This is ${employees[0].name}'s Team</h1>
+            <h2 class="display-3">Title: Manager  |  Employee ID#${employees[0].id}</h2>
+                <h4 class="lead">Office Number: ${employees[0].officeNum}.</h4>
+                        <span class="badge badge-secondary bg-light"><a href="mailto:${employees[0].email}">${employees[0].email}</span></a>
+<h3>Team Members</h3>
+${plebs}
         </div>
-    </body>
-    
-    </html>
-    `;
+</div>
+</body>
+    </html>`;
