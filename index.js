@@ -94,11 +94,11 @@ function createEngineer() {
             currentEmployee = new Engineer(res.name, res.id, res.email, res.github);
             plebs +=
                 `<div class="card">
-                <img class="card-img-top" src="../Warlock/images/developer.png" alt="Card image cap">
+                <img class="card-img-top" src="../assets/images/developer.png" alt="Card image cap">
                     <div class="card-block">
                         <h4 class="card-title">${res.name}</h4>
                         <p class="card-text">
-                            Engineer - ID# ${res.id}
+                            Engineer - <i class="fas fa-id-card-alt"></i>ID# ${res.id}
                         </p>
                         <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
                             class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
@@ -138,15 +138,15 @@ function createIntern() {
             currentEmployee = new Intern(res.name, res.id, res.email, res.school);
             plebs += `
             <div class="card">
-                <img class="card-img-top" src="../Warlock/images/intern.png" alt="Card image cap">
+                <img class="card-img-top" src="../assets/images/intern.png" alt="Card image cap">
                     <div class="card-block">
                         <h4 class="card-title">${res.name}</h4>
                         <p class="card-text">
-                            Engineer - ID# ${res.id}
+                            Engineer - <i class="fas fa-id-card-alt"></i>ID# ${res.id}
                         </p>
                         <p class="card-text"><a class="contactLink" href="mailto:${res.email}"><i
                             class="contact fas fa-inbox fa-lg i"></i>${res.email}</a></p>
-                        <p class="card-text">College: ${res.school}</p>
+                        <p class="card-text"><i class="fas fa-school"></i>College: ${res.school}</p>
                     </div>
             </div>`;
             menu();
@@ -155,7 +155,7 @@ function createIntern() {
 
 function finished() {
     const htmlPageContent = generateHTML();
-    fs.writeFile('index.html', htmlPageContent, (err) =>
+    fs.writeFile('../Warlock/dist/index.html', htmlPageContent, (err) =>
         err ? console.log(err) : console.log('Successfully created index.html!')
     )
 }
@@ -168,7 +168,7 @@ const generateHTML = () =>
                     <head>
                         <meta charset="UTF-8">
                             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                                <link href="../Swashbuckler/assets/fontawesome/css/all.css" rel="stylesheet">
+                            <link href="../assets/fontawesome/css/all.css" rel="stylesheet">
                                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
                                         <title>Team</title>
     </head>
@@ -176,9 +176,10 @@ const generateHTML = () =>
                                         <div class="jumbotron jumbotron-fluid">
                                             <div class="container">
                                                 <h1 class="display-1">This is ${employees[0].name}'s Team</h1>
-                                                <h2 class="display-3">Title: Manager  |  Employee ID#${employees[0].id}</h2>
+                                                <h2 class="display-3">Title: Manager  |  <i class="fas fa-id-card-alt"></i>ID#${employees[0].id}</h2>
                                                 <h4 class="lead">Office Number: ${employees[0].officeNum}.</h4>
-                                                <span class="badge badge-secondary bg-light"><a href="mailto:${employees[0].email}">${employees[0].email}</span></a>
+                                                <span class="badge badge-secondary bg-light"><a href="mailto:${employees[0].email}"<i
+                                                class="contact fas fa-inbox fa-lg i">${employees[0].email}</span></i></a>
                                             </div>
                                         </div>
                                         <h3>Team Members</h3>
